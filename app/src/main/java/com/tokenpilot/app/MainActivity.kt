@@ -93,11 +93,12 @@ private fun PilotApp(records: List<Usage>, failed: Boolean, save: (List<Usage>) 
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                     Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text("연결 및 데이터", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("PC 연결 · 개발용", color = MaterialTheme.colorScheme.primary)
-                        Text("USB/에뮬레이터의 ADB 연결과 PC companion 실행이 필요합니다. 화면을 보고 있을 때 60초마다 조회합니다.")
+                        Text("휴대폰 직접 연결 · 테스트용", color = MaterialTheme.colorScheme.primary)
+                        Text("홈에서 기기 코드를 발급받고 공식 OpenAI 페이지에서 로그인하세요. PC 연결 없이 화면을 보고 있을 때 60초마다 조회합니다.")
                         HorizontalDivider()
                         Text("기록은 이 기기에 저장됩니다. 앱을 삭제하면 기록도 삭제됩니다.")
-                        Text("무선 연결과 백그라운드 사용량 조회는 개발 예정입니다. 예약 알림은 마지막 조회 시각을 기준으로 동작합니다.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("인증 정보는 Android Keystore로 암호화해 저장합니다. 연결 해제 시 인증 정보와 자동 조회 기록을 지웁니다. 수동 기록은 유지합니다.")
+                        Text("백그라운드 사용량 조회는 아직 지원하지 않습니다. 예약 알림은 마지막 조회값을 기준으로 동작합니다.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             } else {

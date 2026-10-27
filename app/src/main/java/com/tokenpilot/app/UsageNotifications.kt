@@ -65,7 +65,7 @@ object UsageNotifications {
         val stored = prefs(context)
         val keys = snapshot.windows.map { it.eventKey }.toSet()
         val delivered = stored.getStringSet("delivered", emptySet()).orEmpty().intersect(keys)
-        stored.edit().putString("snapshot", JSONObject().put("checked", snapshot.checked).put("windows", rows).toString())
+        stored.edit().putString("snapshot", JSONObject().put("source", "direct-codex").put("checked", snapshot.checked).put("windows", rows).toString())
             .putStringSet("delivered", delivered).putBoolean("failed", false).apply()
         reconcile(context)
     }
@@ -75,9 +75,21 @@ object UsageNotifications {
         reconcile(context)
     }
 
+    fun clearSnapshot(context: Context) {
+        prefs(context).edit().remove("snapshot").remove("delivered").remove("failed").commit()
+        cancel(context, RESET_ACTION)
+        cancel(context, TEST_ACTION)
+        manager(context).cancel(STATUS_ID)
+        manager(context).cancel(RESET_ID)
+        manager(context).cancel(TEST_ID)
+    }
+
+    fun lastSnapshot(context: Context): Snapshot? = load(context)
+
     private fun load(context: Context): Snapshot? = try {
         prefs(context).getString("snapshot", null)?.let { text ->
             val json = JSONObject(text)
+            require(json.optString("source") == "direct-codex") // Do not display old PC/account data after migration.
             val rows = json.getJSONArray("windows")
             Snapshot(json.getLong("checked"), List(rows.length()) { i ->
                 val row = rows.getJSONObject(i)
@@ -126,7 +138,7 @@ object UsageNotifications {
         val now = System.currentTimeMillis()
         val displayZone = zone(context)
         if (enabled(context, STATUS) && channelAllowed(context, STATUS)) {
-            val body = if (data == null) "조회 기록이 없습니다. PC 연결 후 홈에서 새로고침하세요." else buildString {
+            val body = if (data == null) "조회 기록이 없습니다. 앱에서 로그인 후 새로고침하세요." else buildString {
                 append("마지막 확인 ${displayTime(data.checked, displayZone)} · ${displayZone.id}\n")
                 if (stored.getBoolean("failed", false)) append("연결 실패 · 저장된 이전 값입니다.\n")
                 append(data.windows.joinToString("\n") { row ->

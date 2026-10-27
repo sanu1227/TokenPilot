@@ -14,7 +14,7 @@
 .cxx
 local.properties
 
-# Public source snapshots: local credentials and generated data stay private.
+# Keep the existing public repository's private/generated-file exclusions.
 .env
 .env.*
 !.env.example
@@ -50,5 +50,8 @@ docs/screenshots/
 .idea/
 .gradle/
 .kotlin/
-local.properties
 docs/*.png
+*.apk
+*.aab
+auth.json
+*.enc

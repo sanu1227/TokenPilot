@@ -10,8 +10,9 @@ android {
         applicationId = "com.tokenpilot.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1-direct-preview"
+        testInstrumentationRunner = "com.tokenpilot.app.DirectStorageChecks"
     }
 
     buildTypes {
@@ -44,6 +45,8 @@ kotlin {
 
 dependencies {
   testImplementation(libs.junit)
+  // Android supplies org.json in production; the JVM needs its implementation for protocol tests.
+  testImplementation("org.json:json:20240303")
   val composeBom = platform(libs.androidx.compose.bom)
   implementation(composeBom)
   implementation(libs.androidx.core.ktx)
