@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="48dp"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:paddingStart="10dp" android:paddingEnd="4dp" android:background="@drawable/notification_mint">
+            <TextView android:layout_width="match_parent" android:text="5시간 · 조회값"
+                android:layout_height="wrap_content" android:textColor="#34594F" android:textSize="10sp"
+                android:maxLines="1" android:ellipsize="end" android:includeFontPadding="false" />
+            <TextView android:id="@+id/usage_five" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:textColor="#124D40" android:textSize="19sp"
+                android:textStyle="bold" android:maxLines="1" android:ellipsize="end" android:includeFontPadding="false" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginStart="6dp"
+            android:orientation="vertical" android:gravity="center_vertical" android:paddingStart="10dp" android:paddingEnd="4dp" android:background="@drawable/notification_lavender">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="주간 · 조회값"
+                android:textSize="10sp" android:textColor="#555078" android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/usage_week" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="19sp" android:textStyle="bold" android:textColor="#53429B" android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <TextView android:id="@+id/usage_open" android:layout_width="48dp" android:layout_height="48dp"
+            android:text="열기" android:contentDescription="TokenPilot 앱 열기" android:gravity="center"
+            android:textSize="12sp" android:textStyle="bold" style="@android:style/TextAppearance.Material.Notification" />
+    </LinearLayout>
+    <TextView android:id="@+id/usage_details" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:visibility="gone" style="@android:style/TextAppearance.Material.Notification"
+        android:textSize="12sp" android:maxLines="9" android:ellipsize="end"
+        android:paddingTop="10dp" android:paddingBottom="4dp" />
+</LinearLayout>
